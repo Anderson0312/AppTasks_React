@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import {v4 as uuidv4} from 'uuid'
-import { BrowserRouter , Route } from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 import "./App.css";
 
 import AddTask from './componets/Addtask';
 import Header from './componets/Header';
 import Tasks from "./componets/Tasks";
+import TaskDetails from "./componets/TaskDetails"
 
 
 const App = () => {
@@ -25,10 +26,10 @@ const App = () => {
 
     const handleTaskClick = (taskId) => {
         const newTasks = tasks.map((task) => {
-            if (task.id === taskId) return { ...task, completed: !task.completed}
+            if (task.id === taskId) return { ...task, completed: !task.completed};
 
             return task;
-        })
+        });
         setTasks(newTasks);
     }
 
@@ -50,25 +51,29 @@ const App = () => {
     
 
     return (
-        <BrowserRouter>
+        <Router>
             <div className="container">
                 <Header />
-                <Route 
+                <Route
                     path="/" 
                     exact 
-                    render= {() => (
+                    render = {() => (
                         <>
-                            <AddTask hendleTaskAddition={hendleTaskAddition} />
-                            <Tasks 
-                                tasks= {tasks} 
-                                handleTaskClick={handleTaskClick} 
-                                handleTaskDeletion={handleTaskDeletion}
-                             />
+                            <AddTask hendleTaskAddition = {hendleTaskAddition} />
+                            <Tasks
+                                tasks = {tasks}
+                                handleTaskClick = {handleTaskClick}
+                                handleTaskDeletion = {handleTaskDeletion}
+                            />
+
+                            
                         </>
                     )}
                 />
+
+                <Route path="/:taskTitle" exact component={TaskDetails} />
             </div>
-        </ BrowserRouter>  
+        </Router>
     ) 
 }
 
