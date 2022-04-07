@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+
 import Button from './Button';
 
 import "./Dateils.css";
@@ -10,14 +11,14 @@ const TaskDetails = () => {
     
     const handleBackButtonClick = () => {
         history.goBack();
-    }
+    };
 
     return (
         <>
             <div className="back-button-container">
-                <Button onClick={handleBackButtonClick}>
+                <button onClick={handleBackButtonClick}>
                     Voltar
-                </Button>
+                </button>
             </div>
             <div className="task-details-container">
                 <h2>{params.taskTitle}</h2>
